@@ -29,11 +29,6 @@ export const Content = styled.div`
       margin-bottom: 24px;
     }
 
-    input,
-    button {
-      border-radius: 5px;
-    }
-
     a {
       display: block;
       color: ${text.offWhite};

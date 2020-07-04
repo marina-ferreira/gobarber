@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useField } from '@unform/core'
 
@@ -6,6 +6,8 @@ import { Container } from './styles'
 
 const Input = ({ name, icon: Icon, ...props }) => {
   const inputRef = useRef(null)
+  const [isFocused, setIsFocused] = useState(false)
+  const [isFilled, setIsFilled] = useState(false)
   const { fieldName, defaultValue, error, registerField } = useField(name)
 
   useEffect(() => {
@@ -16,13 +18,23 @@ const Input = ({ name, icon: Icon, ...props }) => {
     })
   }, [fieldName, registerField])
 
+  const handleInputFocus = useCallback(() => setIsFocused(true), [])
+
+  const handleInputBlur = useCallback(() => {
+    setIsFocused(false)
+    setIsFilled(!!inputRef.current?.value)
+  }, [])
+
   return (
-    <Container>
+    <Container isFilled={isFilled} isFocused={isFocused}>
       {Icon && <Icon size={20} />}
+
       <input
         type="text"
         ref={inputRef}
         defaultValue={defaultValue}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
         {...props}
       />
     </Container>

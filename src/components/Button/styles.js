@@ -13,6 +13,7 @@ export const StyledButton = styled.button`
   border: 0;
   color: ${text.button};
   transition: background 0.2s;
+  border-radius: 5px;
   background: ${bg.button};
 
   &:hover {

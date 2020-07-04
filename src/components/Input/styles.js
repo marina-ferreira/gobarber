@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { appColors } from 'styles/global'
 
@@ -12,10 +12,24 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   color: ${text.placeholder};
+  border-radius: 5px;
 
   & + div {
     margin-top: 8px;
   }
+
+  ${({ isFocused }) =>
+    isFocused &&
+    css`
+      color: ${bg.button};
+      border-color: ${bg.button};
+    `}
+
+  ${({ isFilled }) =>
+    isFilled &&
+    css`
+      color: ${bg.button};
+    `}
 
   input {
     flex: 1;
