@@ -18,6 +18,12 @@ export const Container = styled.div`
     margin-top: 8px;
   }
 
+  ${({ isErrored }) =>
+    isErrored &&
+    css`
+      border-color: ${text.error};
+    `}
+
   ${({ isFocused }) =>
     isFocused &&
     css`
@@ -44,5 +50,14 @@ export const Container = styled.div`
 
   svg {
     margin-right: 16px;
+  }
+`
+
+export const Error = styled.div`
+  height: 20px;
+  margin-left: 16px;
+
+  svg {
+    margin: 0;
   }
 `

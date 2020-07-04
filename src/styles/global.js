@@ -4,7 +4,8 @@ export const appColors = {
   text: {
     offWhite: '#f4ede8',
     button: '#312e38',
-    placeholder: '#666360'
+    placeholder: '#666360',
+    error: '#c53030'
   },
   bg: {
     body: '#312e38',

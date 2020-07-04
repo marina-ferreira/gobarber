@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useField } from '@unform/core'
+import { FiAlertCircle } from 'react-icons/fi'
 
-import { Container } from './styles'
+import { appColors } from 'styles/global'
+import { Container, Error } from './styles'
+
+const { text } = appColors
 
 const Input = ({ name, icon: Icon, ...props }) => {
   const inputRef = useRef(null)
@@ -26,7 +30,7 @@ const Input = ({ name, icon: Icon, ...props }) => {
   }, [])
 
   return (
-    <Container isFilled={isFilled} isFocused={isFocused}>
+    <Container isFilled={isFilled} isFocused={isFocused} isErrored={!!error}>
       {Icon && <Icon size={20} />}
 
       <input
@@ -38,7 +42,11 @@ const Input = ({ name, icon: Icon, ...props }) => {
         {...props}
       />
 
-      {error}
+      {error && (
+        <Error>
+          <FiAlertCircle color={text.error} size={20} />
+        </Error>
+      )}
     </Container>
   )
 }
