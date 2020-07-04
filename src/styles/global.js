@@ -2,10 +2,14 @@ import { createGlobalStyle } from 'styled-components'
 
 export const appColors = {
   text: {
-    offWhite: '#fafafa'
+    offWhite: '#f4ede8',
+    button: '#312e38',
+    placeholder: '#666360'
   },
   bg: {
-    body: '#312e38'
+    body: '#312e38',
+    button: '#ff9000',
+    input: '#232129'
   }
 }
 
@@ -16,6 +20,10 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 500;
   }
 
   body {
@@ -29,8 +37,10 @@ export default createGlobalStyle`
     font-size: 16px;
   }
 
-  h1, h2, h3, h4, h5, h6, strong {
-    font-weight: 500;
+  input, button {
+    &:focus {
+      outline: 1px solid ${bg.button};
+    }
   }
 
   button {

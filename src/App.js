@@ -1,10 +1,12 @@
 import React from 'react'
 import GlobalStyles from 'styles/global'
 
+import SignIn from 'pages/SignIn'
+
 const App = () => {
   return (
     <>
-      <h1>Hello Barber</h1>
+      <SignIn />
       <GlobalStyles />
     </>
   )
