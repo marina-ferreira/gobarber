@@ -37,6 +37,8 @@ const Input = ({ name, icon: Icon, ...props }) => {
         onBlur={handleInputBlur}
         {...props}
       />
+
+      {error}
     </Container>
   )
 }

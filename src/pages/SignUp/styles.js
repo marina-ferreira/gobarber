@@ -4,7 +4,7 @@ import { shade } from 'polished'
 import signUpBg from 'assets/sign-up-bg.png'
 import { appColors } from 'styles/global'
 
-const { text, bg } = appColors
+const { text } = appColors
 
 export const Container = styled.div`
   height: 100vh;
