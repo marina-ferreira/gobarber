@@ -39,37 +39,6 @@ export const Content = styled.div`
       border-radius: 5px;
     }
 
-    input {
-      width: 100%;
-      padding: 16px;
-      border: 2px solid ${inputBg};
-      color: ${offWhite};
-      background: ${inputBg};
-
-      & + input {
-        margin-top: 8px;
-      }
-
-      &::placeholder {
-        color: ${textPlaceholder};
-      }
-    }
-
-    button {
-      width: 100%;
-      height: 56px;
-      padding: 0 16px;
-      margin-top: 16px;
-      border: 0;
-      color: ${textButton};
-      transition: background 0.2s;
-      background: ${buttonBg};
-
-      &:hover {
-        background: ${shade(0.2, buttonBg)};
-      }
-    }
-
     a {
       display: block;
       color: ${offWhite};
