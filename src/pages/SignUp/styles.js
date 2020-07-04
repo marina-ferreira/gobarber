@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { shade } from 'polished'
 
-import signInBg from 'assets/sign-in-bg.png'
+import signUpBg from 'assets/sign-up-bg.png'
 import { appColors } from 'styles/global'
 
 const { text, bg } = appColors
@@ -48,7 +48,7 @@ export const Content = styled.div`
   }
 
   > a {
-    color: ${bg.button};
+    color: ${text.offWhite};
     margin-top: 24px;
     text-decoration: none;
     transition: color 0.2s;
@@ -67,6 +67,6 @@ export const Content = styled.div`
 
 export const Background = styled.div`
   flex: 1;
-  background: url(${signInBg}) no-repeat center;
+  background: url(${signUpBg}) no-repeat center;
   background-size: cover;
 `
