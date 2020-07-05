@@ -39,6 +39,7 @@ const Input = ({ name, icon: Icon, ...props }) => {
         defaultValue={defaultValue}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        autoComplete="on"
         {...props}
       />
 

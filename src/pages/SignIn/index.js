@@ -39,7 +39,11 @@ const SignIn = () => {
           return
         }
 
-        showToast()
+        showToast({
+          type: 'error',
+          title: 'Authentication Error',
+          description: 'Sign in failed. Invalid credentials.'
+        })
       }
     },
     [signIn, showToast]

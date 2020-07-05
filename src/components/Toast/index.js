@@ -4,45 +4,25 @@ import { FiAlertCircle, FiXCircle } from 'react-icons/fi'
 
 import { Container, Content } from './styles'
 
-const Toast = ({ children = '' }) => {
+const Toast = ({ messages }) => {
   return (
     <Container>
-      <Content type="info" hasDescription={false}>
-        <FiAlertCircle size={20} />
+      {console.log(messages)}
 
-        <div>
-          <strong>An error ocurred</strong>
-          {/* <p>Request failed</p> */}
-        </div>
+      {messages.map(({ type = 'info', title, description, id }) => (
+        <Content key={id} type={type} hasDescription={!!description}>
+          <FiAlertCircle size={20} />
 
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Content>
-      <Content type="success">
-        <FiAlertCircle size={20} />
+          <div>
+            <strong>{title}</strong>
+            <p>{description}</p>
+          </div>
 
-        <div>
-          <strong>An error ocurred</strong>
-          <p>Request failed</p>
-        </div>
-
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Content>
-      <Content type="error">
-        <FiAlertCircle size={20} />
-
-        <div>
-          <strong>An error ocurred</strong>
-          <p>Request failed</p>
-        </div>
-
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Content>
+          <button type="button">
+            <FiXCircle size={18} />
+          </button>
+        </Content>
+      ))}
     </Container>
   )
 }
@@ -50,5 +30,11 @@ const Toast = ({ children = '' }) => {
 export default Toast
 
 Toast.propTypes = {
-  children: PropTypes.element
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string
+    })
+  ).isRequired
 }
