@@ -1,9 +1,11 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useRef, useContext } from 'react'
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web'
 import * as Yup from 'yup'
 
 import getValidationErrors from 'utils/getValidationErrors'
+import { AuthContext } from 'contexts/AuthContext'
+
 import Button from 'components/Button'
 import Input from 'components/Input'
 
@@ -17,19 +19,26 @@ const schema = Yup.object().shape({
 
 const SignIn = () => {
   const formRef = useRef(null)
+  const { name, signIn } = useContext(AuthContext)
+  console.log('context', name)
 
-  const handleSubmit = useCallback(async data => {
-    formRef.current && formRef.current.setErrors({})
+  const handleSubmit = useCallback(
+    async data => {
+      formRef.current && formRef.current.setErrors({})
 
-    try {
-      await schema.validate(data, {
-        abortEarly: false
-      })
-    } catch (error) {
-      const errors = getValidationErrors(error)
-      formRef.current && formRef.current.setErrors(errors)
-    }
-  }, [])
+      try {
+        await schema.validate(data, {
+          abortEarly: false
+        })
+
+        signIn(data)
+      } catch (error) {
+        const errors = getValidationErrors(error)
+        formRef.current && formRef.current.setErrors(errors)
+      }
+    },
+    [signIn]
+  )
 
   return (
     <Container>
