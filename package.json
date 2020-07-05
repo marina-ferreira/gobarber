@@ -16,6 +16,7 @@
     "react-icons": "^3.10.0",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
+    "uuidv4": "^6.1.1",
     "websocket-extensions": "^0.1.4",
     "yup": "^0.29.1"
   },
