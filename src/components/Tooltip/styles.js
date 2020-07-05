@@ -1,9 +1,8 @@
 import styled from 'styled-components'
-import { shade } from 'polished'
 
 import { appColors } from 'styles/global'
 
-const { text, bg } = appColors
+const { bg } = appColors
 
 export const Container = styled.div`
   position: relative;
