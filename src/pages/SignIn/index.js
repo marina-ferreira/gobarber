@@ -4,7 +4,7 @@ import { Form } from '@unform/web'
 import * as Yup from 'yup'
 
 import getValidationErrors from 'utils/getValidationErrors'
-import { useAuth } from 'hooks'
+import { useAuth, useToast } from 'hooks'
 
 import Button from 'components/Button'
 import Input from 'components/Input'
@@ -20,6 +20,7 @@ const schema = Yup.object().shape({
 const SignIn = () => {
   const formRef = useRef(null)
   const { signIn } = useAuth()
+  const { showToast } = useToast()
 
   const handleSubmit = useCallback(
     async data => {
@@ -30,15 +31,18 @@ const SignIn = () => {
           abortEarly: false
         })
 
-        signIn(data)
+        await signIn(data)
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error)
           formRef.current && formRef.current.setErrors(errors)
+          return
         }
+
+        showToast()
       }
     },
-    [signIn]
+    [signIn, showToast]
   )
 
   return (

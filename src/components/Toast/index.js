@@ -4,7 +4,7 @@ import { FiAlertCircle, FiXCircle } from 'react-icons/fi'
 
 import { Container, Content } from './styles'
 
-const Toast = ({ children }) => {
+const Toast = ({ children = '' }) => {
   return (
     <Container>
       <Content type="info" hasDescription={false}>
@@ -50,5 +50,5 @@ const Toast = ({ children }) => {
 export default Toast
 
 Toast.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element
 }
