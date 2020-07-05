@@ -19,8 +19,8 @@ const schema = Yup.object().shape({
 
 const SignIn = () => {
   const formRef = useRef(null)
-  const { name, signIn } = useContext(AuthContext)
-  console.log('context', name)
+  const { user, signIn } = useContext(AuthContext)
+  console.log('context', user)
 
   const handleSubmit = useCallback(
     async data => {
