@@ -2,13 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { FiAlertCircle, FiXCircle } from 'react-icons/fi'
 
+import { useToast } from 'contexts/ToastContext'
+
 import { Container, Content } from './styles'
 
 const Toast = ({ messages }) => {
+  const { hideToast } = useToast()
+
   return (
     <Container>
-      {console.log(messages)}
-
       {messages.map(({ type = 'info', title, description, id }) => (
         <Content key={id} type={type} hasDescription={!!description}>
           <FiAlertCircle size={20} />
@@ -18,7 +20,7 @@ const Toast = ({ messages }) => {
             <p>{description}</p>
           </div>
 
-          <button type="button">
+          <button type="button" onClick={() => hideToast(id)}>
             <FiXCircle size={18} />
           </button>
         </Content>
