@@ -7,7 +7,9 @@ export const appColors = {
     placeholder: '#666360',
     error: '#c53030',
     tooltip: {
-      info: '#ebf8ff'
+      info: '#ebf8ff',
+      success: '#e6fff1',
+      error: '#fddede'
     }
   },
   bg: {
@@ -15,7 +17,9 @@ export const appColors = {
     button: '#ff9000',
     input: '#232129',
     tooltip: {
-      info: '#3172b7'
+      info: '#3172b7',
+      success: '#2e656a',
+      error: '#c53030'
     }
   }
 }

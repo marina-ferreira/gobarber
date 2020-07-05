@@ -4,6 +4,21 @@ import { appColors } from 'styles/global'
 
 const { text, bg } = appColors
 
+const toastTypeVariations = {
+  info: {
+    color: text.tooltip.info,
+    background: bg.tooltip.info
+  },
+  success: {
+    color: text.tooltip.success,
+    background: bg.tooltip.success
+  },
+  error: {
+    color: text.tooltip.error,
+    background: bg.tooltip.error
+  }
+}
+
 export const Container = styled.div`
   top: 0;
   right: 0;
@@ -21,6 +36,8 @@ export const Content = styled.div`
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   background: ${bg.tooltip.info};
   color: ${text.tooltip.info};
+
+  ${({ type }) => toastTypeVariations[type] || 'info'}
 
   > svg {
     margin: 4px 12px 00;
