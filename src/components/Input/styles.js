@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import Tooltip from 'components/Tooltip'
 
 import { appColors } from 'styles/global'
 
@@ -53,9 +54,18 @@ export const Container = styled.div`
   }
 `
 
-export const Error = styled.div`
+export const Error = styled(Tooltip)`
   height: 20px;
   margin-left: 16px;
+
+  span {
+    background: ${text.error};
+    color: ${text.offWhite};
+
+    &::before {
+      border-color: ${text.error} transparent;
+    }
+  }
 
   svg {
     margin: 0;

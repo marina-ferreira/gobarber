@@ -43,7 +43,7 @@ const Input = ({ name, icon: Icon, ...props }) => {
       />
 
       {error && (
-        <Error>
+        <Error title={error}>
           <FiAlertCircle color={text.error} size={20} />
         </Error>
       )}
