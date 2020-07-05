@@ -4,15 +4,15 @@ import { FiAlertCircle, FiXCircle } from 'react-icons/fi'
 
 import { Container, Content } from './styles'
 
-const Toast = ({ children, ...rest }) => {
+const Toast = ({ children }) => {
   return (
     <Container>
-      <Content type="info" hasDescription>
+      <Content type="info" hasDescription={false}>
         <FiAlertCircle size={20} />
 
         <div>
           <strong>An error ocurred</strong>
-          <p>Request failed</p>
+          {/* <p>Request failed</p> */}
         </div>
 
         <button type="button">

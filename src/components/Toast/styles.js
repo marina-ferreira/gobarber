@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { appColors } from 'styles/global'
 
@@ -39,6 +39,10 @@ export const Content = styled.div`
 
   ${({ type }) => toastTypeVariations[type] || 'info'}
 
+  & + div {
+    margin-top: 8px;
+  }
+
   > svg {
     margin: 4px 12px 00;
   }
@@ -67,4 +71,14 @@ export const Content = styled.div`
       outline: 1px solid ${bg.button};
     }
   }
+
+  ${({ hasDescription }) =>
+    !hasDescription &&
+    css`
+      align-items: center;
+
+      > svg {
+        margin-top: 0;
+      }
+    `}
 `
