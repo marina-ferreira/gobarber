@@ -5,12 +5,18 @@ export const appColors = {
     offWhite: '#f4ede8',
     button: '#312e38',
     placeholder: '#666360',
-    error: '#c53030'
+    error: '#c53030',
+    tooltip: {
+      info: '#ebf8ff'
+    }
   },
   bg: {
     body: '#312e38',
     button: '#ff9000',
-    input: '#232129'
+    input: '#232129',
+    tooltip: {
+      info: '#3172b7'
+    }
   }
 }
 

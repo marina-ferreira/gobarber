@@ -11,7 +11,7 @@ const Button = ({ children, ...rest }) => {
   )
 }
 
-export default StyledButton
+export default Button
 
 Button.propTypes = {
   children: PropTypes.element.isRequired

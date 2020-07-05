@@ -32,8 +32,10 @@ const SignIn = () => {
 
         signIn(data)
       } catch (error) {
-        const errors = getValidationErrors(error)
-        formRef.current && formRef.current.setErrors(errors)
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error)
+          formRef.current && formRef.current.setErrors(errors)
+        }
       }
     },
     [signIn]
