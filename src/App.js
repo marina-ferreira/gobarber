@@ -1,20 +1,17 @@
 import React from 'react'
 import GlobalStyles from 'styles/global'
 
-import { AuthProvider } from 'contexts/AuthContext'
+import AppProvider from 'contexts'
 
 import SignIn from 'pages/SignIn'
-import Toast from 'components/Toast'
 // import SignUp from 'pages/SignUp'
 
 const App = () => {
   return (
     <>
-      <AuthProvider>
+      <AppProvider>
         <SignIn />
-      </AuthProvider>
-
-      <Toast />
+      </AppProvider>
 
       <GlobalStyles />
     </>
