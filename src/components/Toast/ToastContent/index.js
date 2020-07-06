@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { FiAlertCircle, FiXCircle } from 'react-icons/fi'
+import { FiAlertCircle, FiXCircle, FiCheckCircle, FiInfo } from 'react-icons/fi'
 
 import { useToast } from 'contexts/ToastContext'
 
 import { Content } from './styles'
+
+const icons = {
+  info: <FiInfo size={20} />,
+  success: <FiCheckCircle size={20} />,
+  error: <FiAlertCircle size={20} />
+}
 
 const ToastContent = ({
   message: { id, type = 'info', title, description }
@@ -19,7 +25,8 @@ const ToastContent = ({
 
   return (
     <Content type={type} hasDescription={!!description}>
-      <FiAlertCircle size={20} />
+      {icons[type]}
+
       <div>
         <strong>{title}</strong>
         <p>{description}</p>
