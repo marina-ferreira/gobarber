@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { FiAlertCircle, FiXCircle } from 'react-icons/fi'
 
@@ -6,13 +6,20 @@ import { useToast } from 'contexts/ToastContext'
 
 import { Content } from './styles'
 
-const ToastContent = ({ id, type, title, description }) => {
+const ToastContent = ({
+  message: { id, type = 'info', title, description }
+}) => {
   const { hideToast } = useToast()
+
+  useEffect(() => {
+    const timer = setTimeout(() => hideToast(id), 3000)
+
+    return () => clearTimeout(timer)
+  }, [id, hideToast])
 
   return (
     <Content type={type} hasDescription={!!description}>
       <FiAlertCircle size={20} />
-
       <div>
         <strong>{title}</strong>
         <p>{description}</p>
@@ -28,13 +35,5 @@ const ToastContent = ({ id, type, title, description }) => {
 export default ToastContent
 
 ToastContent.propTypes = {
-  id: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string
-}
-
-ToastContent.defaultProps = {
-  type: 'info',
-  description: null
+  message: PropTypes.objectOf(PropTypes.string).isRequired
 }
