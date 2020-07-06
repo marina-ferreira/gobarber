@@ -13,7 +13,8 @@ const icons = {
 }
 
 const ToastContent = ({
-  message: { id, type = 'info', title, description }
+  message: { id, type = 'info', title, description },
+  style
 }) => {
   const { hideToast } = useToast()
 
@@ -24,7 +25,7 @@ const ToastContent = ({
   }, [id, hideToast])
 
   return (
-    <Content type={type} hasDescription={!!description}>
+    <Content type={type} hasDescription={!!description} style={style}>
       {icons[type]}
 
       <div>
@@ -42,5 +43,10 @@ const ToastContent = ({
 export default ToastContent
 
 ToastContent.propTypes = {
-  message: PropTypes.objectOf(PropTypes.string).isRequired
+  message: PropTypes.objectOf(PropTypes.string).isRequired,
+  style: PropTypes.objectOf(PropTypes.any)
+}
+
+ToastContent.defaultProps = {
+  style: {}
 }

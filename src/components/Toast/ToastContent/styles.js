@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { animated } from 'react-spring'
 
 import { appColors } from 'styles/global'
 
@@ -19,7 +20,7 @@ const toastTypeVariations = {
   }
 }
 
-export const Content = styled.div`
+export const Content = styled(animated.div)`
   width: 360px;
   padding: 16px 30px 16px 16px;
   display: flex;
@@ -74,3 +75,7 @@ export const Content = styled.div`
       }
     `}
 `
+
+Content.defaultProps = {
+  hasDescription: true
+}
