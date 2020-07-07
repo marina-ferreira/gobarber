@@ -1,11 +1,11 @@
-import React, { createContext, useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import api from 'services/api'
 
-export const AuthContext = createContext({})
+import { AuthContext } from 'contexts'
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [authData, setAuthData] = useState(() => {
     const token = localStorage.getItem('@GoBarber:token')
     const user = JSON.parse(localStorage.getItem('@GoBarber:user'))
@@ -36,6 +36,8 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   )
 }
+
+export default AuthProvider
 
 AuthProvider.propTypes = {
   children: PropTypes.element.isRequired

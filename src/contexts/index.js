@@ -1,17 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { createContext } from 'react'
 
-import ToastProvider from 'providers/ToastProvider'
-import { AuthProvider } from './AuthContext'
+export const AuthContext = createContext({})
 
-const AppProvider = ({ children }) => (
-  <AuthProvider>
-    <ToastProvider>{children}</ToastProvider>
-  </AuthProvider>
-)
-
-export default AppProvider
-
-AppProvider.propTypes = {
-  children: PropTypes.element.isRequired
-}
+export const ToastContext = createContext({})

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import { uuid } from 'uuidv4'
 
-import { ToastContext } from 'contexts/ToastContext'
+import { ToastContext } from 'contexts'
 import Toast from 'components/Toast'
 
 const ToastProvider = ({ children }) => {
