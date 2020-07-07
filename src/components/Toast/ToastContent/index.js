@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { FiAlertCircle, FiXCircle, FiCheckCircle, FiInfo } from 'react-icons/fi'
 
-import { useToast } from 'contexts/ToastContext'
+import { useToast } from 'hooks'
 
 import { Content } from './styles'
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import ToastProvider from 'providers/ToastProvider'
 import { AuthProvider } from './AuthContext'
-import { ToastProvider } from './ToastContext'
 
 const AppProvider = ({ children }) => (
   <AuthProvider>

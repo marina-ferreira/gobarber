@@ -4,8 +4,7 @@ import { Form } from '@unform/web'
 import * as Yup from 'yup'
 
 import getValidationErrors from 'utils/getValidationErrors'
-import { useAuth } from 'hooks'
-import { useToast } from 'contexts/ToastContext'
+import { useAuth, useToast } from 'hooks'
 
 import Button from 'components/Button'
 import Input from 'components/Input'
