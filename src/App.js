@@ -1,20 +1,20 @@
 import React from 'react'
-import GlobalStyles from 'styles/global'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import AppProvider from 'providers'
+import Routes from 'routes'
 
-import SignIn from 'pages/SignIn'
-// import SignUp from 'pages/SignUp'
+import GlobalStyles from 'styles/global'
 
 const App = () => {
   return (
-    <>
+    <Router>
       <AppProvider>
-        <SignIn />
+        <Routes />
       </AppProvider>
 
       <GlobalStyles />
-    </>
+    </Router>
   )
 }
 
