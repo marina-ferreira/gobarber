@@ -12,7 +12,7 @@ import Button from 'components/Button'
 import Input from 'components/Input'
 
 import logo from 'assets/logo.svg'
-import { Container, Content, Background } from './styles'
+import { Container, Content, Background, AnimationContainer } from './styles'
 
 const schema = Yup.object().shape({
   email: Yup.string().required().email(),
@@ -54,30 +54,36 @@ const SignIn = () => {
   return (
     <Container>
       <Content>
-        <img src={logo} alt="GoBarber" />
+        <AnimationContainer>
+          <img src={logo} alt="GoBarber" />
 
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Sign in</h1>
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <h1>Sign in</h1>
 
-          <Input name="email" type="email" icon={FiMail} placeholder="Email" />
-          <Input
-            name="password"
-            type="password"
-            icon={FiLock}
-            placeholder="Senha"
-          />
+            <Input
+              name="email"
+              type="email"
+              icon={FiMail}
+              placeholder="Email"
+            />
+            <Input
+              name="password"
+              type="password"
+              icon={FiLock}
+              placeholder="Senha"
+            />
 
-          <Button type="submit">Sign In</Button>
+            <Button type="submit">Sign In</Button>
 
-          <a href="forgot">Forgot my password</a>
-        </Form>
+            <a href="forgot">Forgot my password</a>
+          </Form>
 
-        <Link to="/sign-up">
-          <FiLogIn />
-          Sign Up
-        </Link>
+          <Link to="/sign-up">
+            <FiLogIn />
+            Sign Up
+          </Link>
+        </AnimationContainer>
       </Content>
-
       <Background />
     </Container>
   )
