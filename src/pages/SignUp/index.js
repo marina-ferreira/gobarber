@@ -1,6 +1,7 @@
 import React, { useCallback, useRef } from 'react'
 import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi'
 import { Form } from '@unform/web'
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import getValidationErrors from 'utils/getValidationErrors'
@@ -55,10 +56,10 @@ const SignUp = () => {
           <Button type="submit">Sign Up</Button>
         </Form>
 
-        <a href="forgot">
+        <Link to="/">
           <FiArrowLeft />
           Sign In
-        </a>
+        </Link>
       </Content>
     </Container>
   )
