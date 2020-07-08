@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react'
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import * as Yup from 'yup'
 
@@ -23,6 +23,7 @@ const SignIn = () => {
   const formRef = useRef(null)
   const { signIn } = useAuth()
   const { showToast } = useToast()
+  const { history } = useHistory()
 
   const handleSubmit = useCallback(
     async data => {
@@ -34,6 +35,7 @@ const SignIn = () => {
         })
 
         await signIn(data)
+        history.push('/dashboard')
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error)
@@ -48,7 +50,7 @@ const SignIn = () => {
         })
       }
     },
-    [signIn, showToast]
+    [signIn, showToast, history]
   )
 
   return (

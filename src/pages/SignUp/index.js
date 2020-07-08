@@ -1,8 +1,12 @@
 import React, { useCallback, useRef } from 'react'
+import { useHistory, Link } from 'react-router-dom'
 import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi'
 import { Form } from '@unform/web'
-import { Link } from 'react-router-dom'
+
 import * as Yup from 'yup'
+
+import api from 'services/api'
+import { useToast } from 'hooks'
 
 import getValidationErrors from 'utils/getValidationErrors'
 
@@ -20,19 +24,40 @@ const schema = Yup.object().shape({
 
 const SignUp = () => {
   const formRef = useRef(null)
+  const { showToast } = useToast()
+  const { history } = useHistory()
 
-  const handleSubmit = useCallback(async data => {
-    formRef.current && formRef.current.setErrors({})
+  const handleSubmit = useCallback(
+    async data => {
+      formRef.current && formRef.current.setErrors({})
 
-    try {
-      await schema.validate(data, {
-        abortEarly: false
-      })
-    } catch (error) {
-      const errors = getValidationErrors(error)
-      formRef.current && formRef.current.setErrors(errors)
-    }
-  }, [])
+      try {
+        await schema.validate(data, { abortEarly: false })
+        await api.post('/users', data)
+
+        history.push('/')
+
+        showToast({
+          type: 'success',
+          title: 'Sign up successful',
+          description: 'You can sign in now'
+        })
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error)
+          formRef.current && formRef.current.setErrors(errors)
+          return
+        }
+
+        showToast({
+          type: 'error',
+          title: 'Authentication Error',
+          description: 'Sign in failed. Invalid credentials.'
+        })
+      }
+    },
+    [history, showToast]
+  )
 
   return (
     <Container>
