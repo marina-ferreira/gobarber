@@ -1,12 +1,13 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import { FiLogIn, FiMail } from 'react-icons/fi'
 import { Form } from '@unform/web'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import * as Yup from 'yup'
 
 import getValidationErrors from 'utils/getValidationErrors'
 import { useToast } from 'hooks'
+import api from 'services/api'
 
 import Button from 'components/Button'
 import Input from 'components/Input'
@@ -21,18 +22,27 @@ const schema = Yup.object().shape({
 const ForgotPassword = () => {
   const formRef = useRef(null)
   const { showToast } = useToast()
-  const { history } = useHistory()
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = useCallback(
     async data => {
       formRef.current && formRef.current.setErrors({})
 
       try {
+        setLoading(true)
+
         await schema.validate(data, {
           abortEarly: false
         })
 
-        history.push('/dashboard')
+        await api.post('/passwords/forgot', { email: data.email })
+
+        showToast({
+          type: 'success',
+          title: 'Recover password email has been sent',
+          description:
+            'An email has been sent to the provided address to confirm password recover.'
+        })
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error)
@@ -45,9 +55,11 @@ const ForgotPassword = () => {
           title: 'Recover Password Error',
           description: 'An error occured on password recover. Try again.'
         })
+      } finally {
+        setLoading(false)
       }
     },
-    [showToast, history]
+    [showToast]
   )
 
   return (
@@ -66,7 +78,9 @@ const ForgotPassword = () => {
               placeholder="Email"
             />
 
-            <Button type="submit">Recover</Button>
+            <Button type="submit" loading={loading}>
+              Recover
+            </Button>
           </Form>
 
           <Link to="/sign-in">
