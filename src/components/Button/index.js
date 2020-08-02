@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import { StyledButton } from './styles'
 
-const Button = ({ children, ...rest }) => {
+const Button = ({ children, loading, ...rest }) => {
   return (
     <StyledButton type="button" {...rest}>
-      {children}
+      {loading ? 'Sending...' : children}
     </StyledButton>
   )
 }
@@ -15,5 +15,10 @@ export default Button
 
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
-    .isRequired
+    .isRequired,
+  loading: PropTypes.bool
+}
+
+Button.defaultProps = {
+  loading: false
 }
