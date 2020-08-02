@@ -25,7 +25,7 @@ const ToastContent = ({
   }, [id, hideToast])
 
   return (
-    <Content type={type} hasDescription={!!description} style={style}>
+    <Content type={type} hasDescription={Number(!!description)} style={style}>
       {icons[type]}
 
       <div>
