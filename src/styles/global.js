@@ -6,6 +6,7 @@ export const appColors = {
     button: '#312e38',
     placeholder: '#666360',
     error: '#c53030',
+    icon: '#999591',
     tooltip: {
       info: '#ebf8ff',
       success: '#e6fff1',
@@ -16,6 +17,7 @@ export const appColors = {
     body: '#312e38',
     button: '#ff9000',
     input: '#232129',
+    header: '#28262e',
     tooltip: {
       info: '#3172b7',
       success: '#2e656a',
