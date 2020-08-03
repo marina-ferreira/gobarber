@@ -18,6 +18,7 @@ export const appColors = {
     button: '#ff9000',
     input: '#232129',
     header: '#28262e',
+    panel: '#3e3b47',
     tooltip: {
       info: '#3172b7',
       success: '#2e656a',

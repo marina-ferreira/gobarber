@@ -61,3 +61,93 @@ export const Profile = styled.div`
     color: ${appColors.bg.button};
   }
 `
+export const Content = styled.main`
+  max-width: 1120px;
+  margin: 64px auto;
+  display: flex;
+`
+export const Schedule = styled.div`
+  flex: 1;
+  margin-right: 120px;
+
+  h1 {
+    font-size: 36px;
+  }
+
+  p {
+    margin-top: 8px;
+    color: ${appColors.bg.button};
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+
+    span + span::before {
+      content: '';
+      width: 1px;
+      height: 12px;
+      margin: 0 8px;
+      background: ${appColors.bg.button};
+    }
+  }
+`
+export const NextAppointment = styled.div`
+  margin-top: 64px;
+
+  strong: {
+    color: ${appColors.text.icon};
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    border-radius: 10px;
+    margin-top: 24px;
+    position: relative;
+    background: ${appColors.bg.panel};
+
+    &::before {
+      content: '';
+      width: 1px;
+      height: 80%;
+      top: 10px;
+      left: 0;
+      position: absolute;
+      background: ${appColors.bg.button};
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+
+    strong {
+      margin-left: 24px;
+      color: ${appColors.text.offWhite};
+    }
+
+    span {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      color: ${appColors.text.icon};
+
+      svg {
+        color: ${appColors.bg.button};
+        margin-right: 8px;
+        margin-top: 2px;
+      }
+    }
+  }
+`
+export const Calendar = styled.aside`
+  width: 380px;
+`
