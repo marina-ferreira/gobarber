@@ -23,7 +23,7 @@ const SignIn = () => {
   const formRef = useRef(null)
   const { signIn } = useAuth()
   const { showToast } = useToast()
-  const { history } = useHistory()
+  const history = useHistory()
 
   const handleSubmit = useCallback(
     async data => {

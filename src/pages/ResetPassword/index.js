@@ -1,14 +1,13 @@
 import React, { useCallback, useRef } from 'react'
-import { useHistory, Link } from 'react-router-dom'
-import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi'
+import { FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web'
+import { useHistory } from 'react-router-dom'
 
 import * as Yup from 'yup'
 
-import api from 'services/api'
-import { useToast } from 'hooks'
-
 import getValidationErrors from 'utils/getValidationErrors'
+import { useToast } from 'hooks'
+import api from 'services/api'
 
 import Button from 'components/Button'
 import Input from 'components/Input'
@@ -17,12 +16,14 @@ import logo from 'assets/logo.svg'
 import { Container, Content, Background, AnimationContainer } from './styles'
 
 const schema = Yup.object().shape({
-  name: Yup.string().required(),
-  email: Yup.string().required().email(),
-  password: Yup.string().min(6)
+  password: Yup.string().required(),
+  password_confirmation: Yup.string().oneOf(
+    [Yup.ref('password'), null],
+    'Passwords must match'
+  )
 })
 
-const SignUp = () => {
+const ResetPassword = () => {
   const formRef = useRef(null)
   const { showToast } = useToast()
   const history = useHistory()
@@ -32,16 +33,22 @@ const SignUp = () => {
       formRef.current && formRef.current.setErrors({})
 
       try {
-        await schema.validate(data, { abortEarly: false })
-        await api.post('/users', data)
+        await schema.validate(data, {
+          abortEarly: false
+        })
+
+        const { password, password_confirmation } = data
+        const token = history.location.search.replace('?token=', '')
+
+        if (!token) throw new Error()
+
+        api.post('/passwords/reset', {
+          token,
+          password,
+          password_confirmation
+        })
 
         history.push('/')
-
-        showToast({
-          type: 'success',
-          title: 'Sign up successful',
-          description: 'You can sign in now'
-        })
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error)
@@ -51,50 +58,44 @@ const SignUp = () => {
 
         showToast({
           type: 'error',
-          title: 'Authentication Error',
-          description: 'Sign in failed. Invalid credentials.'
+          title: 'Reset Password Error',
+          description: 'An error ocurred on reset password. Try again.'
         })
       }
     },
-    [history, showToast]
+    [showToast, history]
   )
 
   return (
     <Container>
-      <Background />
-
       <Content>
         <AnimationContainer>
           <img src={logo} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Register an account</h1>
+            <h1>Reset Password</h1>
 
-            <Input name="name" type="text" icon={FiUser} placeholder="Name" />
-            <Input
-              name="email"
-              type="email"
-              icon={FiMail}
-              placeholder="Email"
-            />
             <Input
               name="password"
               type="password"
               icon={FiLock}
-              placeholder="Senha"
+              placeholder="New password"
             />
 
-            <Button type="submit">Sign Up</Button>
-          </Form>
+            <Input
+              name="password_confirmation"
+              type="password"
+              icon={FiLock}
+              placeholder="Confirm password"
+            />
 
-          <Link to="/">
-            <FiArrowLeft />
-            Back to Sign In
-          </Link>
+            <Button type="submit">Reset</Button>
+          </Form>
         </AnimationContainer>
       </Content>
+      <Background />
     </Container>
   )
 }
 
-export default SignUp
+export default ResetPassword
