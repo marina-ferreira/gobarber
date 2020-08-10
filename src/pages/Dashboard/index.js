@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FiPower, FiClock } from 'react-icons/fi'
 
 import { useAuth } from 'hooks'
@@ -10,12 +10,15 @@ import {
   Profile,
   Content,
   Schedule,
-  Calendar,
-  NextAppointment
+  NextAppointment,
+  Section,
+  Appointment,
+  Calendar
 } from './styles'
 
 const Dashboard = () => {
   const { signOut, user } = useAuth()
+  const [selectedDate, setSelectedDate] = useState(new Date())
 
   return (
     <Container>
@@ -62,8 +65,76 @@ const Dashboard = () => {
               </span>
             </div>
           </NextAppointment>
-          <Calendar />
+          <Section>
+            <strong>Morning</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://github.com/marina-ferreira.png"
+                  alt="Marina Ferreira"
+                />
+
+                <strong>Marina Ferreira</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://github.com/marina-ferreira.png"
+                  alt="Marina Ferreira"
+                />
+
+                <strong>Marina Ferreira</strong>
+              </div>
+            </Appointment>
+          </Section>
+          <Section>
+            <strong>Afternoon</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://github.com/marina-ferreira.png"
+                  alt="Marina Ferreira"
+                />
+
+                <strong>Marina Ferreira</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://github.com/marina-ferreira.png"
+                  alt="Marina Ferreira"
+                />
+
+                <strong>Marina Ferreira</strong>
+              </div>
+            </Appointment>
+          </Section>
         </Schedule>
+        <Calendar />
       </Content>
     </Container>
   )
