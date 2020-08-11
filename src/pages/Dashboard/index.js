@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { FiPower, FiClock } from 'react-icons/fi'
+import DayPicker from 'react-day-picker'
+import PropTypes from 'prop-types'
 
 import { useAuth } from 'hooks'
 import logo from 'assets/logo.svg'
@@ -12,9 +14,11 @@ import {
   Schedule,
   NextAppointment,
   Section,
-  Appointment,
-  Calendar
+  Appointment
 } from './styles'
+
+import Calendar from './calendar.styles'
+import 'react-day-picker/lib/style.css'
 
 const Dashboard = () => {
   const { signOut, user } = useAuth()
@@ -134,10 +138,56 @@ const Dashboard = () => {
             </Appointment>
           </Section>
         </Schedule>
-        <Calendar />
+        <Calendar>
+          <DayPicker
+            weekdaysShort={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
+            navbarElement={<Navbar />}
+          />
+        </Calendar>
       </Content>
     </Container>
   )
 }
 
 export default Dashboard
+
+const Navbar = ({ onPreviousClick, onNextClick, className }) => {
+  const buttonStyles = {
+    width: 54,
+    height: 54,
+    right: 0,
+    color: '#999591',
+    fontSize: 16,
+    border: 'none',
+    position: 'absolute',
+    background: 'transparent'
+  }
+
+  const buttonLeftStyles = {
+    left: 0,
+    right: 'auto',
+    paddingBottom: 4,
+    transform: 'rotate(180deg)'
+  }
+
+  return (
+    <div className={className}>
+      <button
+        type="button"
+        style={{ ...buttonStyles, ...buttonLeftStyles }}
+        onClick={() => onPreviousClick()}
+      >
+        &#10132;
+      </button>
+      <button type="button" style={buttonStyles} onClick={() => onNextClick()}>
+        &#10132;
+      </button>
+    </div>
+  )
+}
+
+Navbar.propTypes = {
+  onPreviousClick: PropTypes.func.isRequired,
+  onNextClick: PropTypes.func.isRequired,
+  className: PropTypes.func.isRequired
+}
