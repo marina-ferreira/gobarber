@@ -13,11 +13,19 @@ const Calendar = styled.aside`
 
   .DayPicker-wrapper {
     padding-bottom: 0;
+
+    &:focus {
+      outline: 1px solid ${appColors.bg.button};
+    }
   }
 
   .DayPicker,
   .DayPicker-Month {
     width: 100%;
+  }
+
+  .DayPicker-Months:focus {
+    outline: 1px solid ${appColors.bg.button};
   }
 
   .DayPicker-Month {
@@ -34,9 +42,14 @@ const Calendar = styled.aside`
     background: ${appColors.bg.panel};
   }
 
+  .DayPicker-Weekday {
+    color: ${appColors.text.placeholder};
+  }
+
   .DayPicker-Day {
     width: 40px;
     height: 40px;
+    outline: none;
   }
 
   .DayPicker-Day--available:not(.DayPicker-Day--outside) {

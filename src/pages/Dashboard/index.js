@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { FiPower, FiClock } from 'react-icons/fi'
 import DayPicker from 'react-day-picker'
 import PropTypes from 'prop-types'
@@ -23,6 +23,10 @@ import 'react-day-picker/lib/style.css'
 const Dashboard = () => {
   const { signOut, user } = useAuth()
   const [selectedDate, setSelectedDate] = useState(new Date())
+
+  const handleDayClick = useCallback((day, modifiers) => {
+    modifiers.available && setSelectedDate(day)
+  }, [])
 
   return (
     <Container>
@@ -141,6 +145,11 @@ const Dashboard = () => {
         <Calendar>
           <DayPicker
             weekdaysShort={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
+            fromMonth={new Date()}
+            selectedDays={selectedDate}
+            disabledDays={[{ daysOfWeek: [0, 6] }]}
+            modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
+            onDayClick={handleDayClick}
             navbarElement={<Navbar />}
           />
         </Calendar>
