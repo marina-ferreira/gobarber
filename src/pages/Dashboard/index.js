@@ -203,8 +203,15 @@ const Navbar = ({
 }
 
 Navbar.propTypes = {
-  onPreviousClick: PropTypes.func.isRequired,
-  onNextClick: PropTypes.func.isRequired,
-  className: PropTypes.func.isRequired,
-  showPreviousButton: PropTypes.func.isRequired
+  className: PropTypes.string,
+  showPreviousButton: PropTypes.bool,
+  onPreviousClick: PropTypes.func,
+  onNextClick: PropTypes.func
+}
+
+Navbar.defaultProps = {
+  className: '',
+  showPreviousButton: true,
+  onPreviousClick: () => {},
+  onNextClick: () => {}
 }
