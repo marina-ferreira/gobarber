@@ -160,7 +160,12 @@ const Dashboard = () => {
 
 export default Dashboard
 
-const Navbar = ({ onPreviousClick, onNextClick, className }) => {
+const Navbar = ({
+  onPreviousClick,
+  onNextClick,
+  className,
+  showPreviousButton
+}) => {
   const buttonStyles = {
     width: 54,
     height: 54,
@@ -171,7 +176,6 @@ const Navbar = ({ onPreviousClick, onNextClick, className }) => {
     position: 'absolute',
     background: 'transparent'
   }
-
   const buttonLeftStyles = {
     left: 0,
     right: 'auto',
@@ -181,13 +185,16 @@ const Navbar = ({ onPreviousClick, onNextClick, className }) => {
 
   return (
     <div className={className}>
-      <button
-        type="button"
-        style={{ ...buttonStyles, ...buttonLeftStyles }}
-        onClick={() => onPreviousClick()}
-      >
-        &#10132;
-      </button>
+      {showPreviousButton && (
+        <button
+          type="button"
+          display="none"
+          style={{ ...buttonStyles, ...buttonLeftStyles }}
+          onClick={() => onPreviousClick()}
+        >
+          &#10132;
+        </button>
+      )}
       <button type="button" style={buttonStyles} onClick={() => onNextClick()}>
         &#10132;
       </button>
@@ -198,5 +205,6 @@ const Navbar = ({ onPreviousClick, onNextClick, className }) => {
 Navbar.propTypes = {
   onPreviousClick: PropTypes.func.isRequired,
   onNextClick: PropTypes.func.isRequired,
-  className: PropTypes.func.isRequired
+  className: PropTypes.func.isRequired,
+  showPreviousButton: PropTypes.func.isRequired
 }
