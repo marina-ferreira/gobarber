@@ -10,7 +10,10 @@ const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('@GoBarber:token')
     const user = JSON.parse(localStorage.getItem('@GoBarber:user'))
 
-    return token && user ? { token, user } : {}
+    if (!token || !user) return {}
+
+    api.defaults.headers.authorization = `Bearer ${token}`
+    return { token, user }
   })
 
   const signIn = useCallback(async ({ email, password }) => {
@@ -19,6 +22,8 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('@GoBarber:token', token)
     localStorage.setItem('@GoBarber:user', JSON.stringify(user))
+
+    api.defaults.headers.authorization = `Bearer ${token}`
 
     setAuthData({ token, user })
   }, [])
