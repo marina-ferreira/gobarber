@@ -1,9 +1,11 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { FiPower, FiClock } from 'react-icons/fi'
 import DayPicker from 'react-day-picker'
 import PropTypes from 'prop-types'
 
+import api from 'services/api'
 import { useAuth } from 'hooks'
+
 import logo from 'assets/logo.svg'
 import {
   Container,
@@ -23,10 +25,38 @@ import 'react-day-picker/lib/style.css'
 const Dashboard = () => {
   const { signOut, user } = useAuth()
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const [currentMonth, setCurrentMonth] = useState(new Date())
+  const [monthAvailability, setMonthAvailability] = useState([])
 
   const handleDayClick = useCallback((day, modifiers) => {
     modifiers.available && setSelectedDate(day)
   }, [])
+
+  const handleMonthChange = useCallback(maonth => {
+    setCurrentMonth(maonth)
+  }, [])
+
+  useEffect(() => {
+    const params = {
+      year: currentMonth.getFullYear(),
+      month: currentMonth.getMonth() + 1
+    }
+
+    api
+      .get(`/providers/${user.id}/month-availability`, { params })
+      .then(response => setMonthAvailability(response.data))
+      .catch(error => console.log(error)) /* eslint-disable-line */
+  }, [currentMonth, user.id])
+
+  const disabledDays = useMemo(() => {
+    return monthAvailability
+      .filter(day => !day.available)
+      .map(monthDay => {
+        const year = currentMonth.getFullYear()
+        const month = currentMonth.getMonth()
+        return new Date(year, month, monthDay.day)
+      })
+  }, [currentMonth, monthAvailability])
 
   return (
     <Container>
@@ -147,9 +177,10 @@ const Dashboard = () => {
             weekdaysShort={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
             fromMonth={new Date()}
             selectedDays={selectedDate}
-            disabledDays={[{ daysOfWeek: [0, 6] }]}
+            disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
             modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
             onDayClick={handleDayClick}
+            onMonthChange={handleMonthChange}
             navbarElement={<Navbar />}
           />
         </Calendar>
