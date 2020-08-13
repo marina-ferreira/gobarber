@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { FiPower, FiClock } from 'react-icons/fi'
 import DayPicker from 'react-day-picker'
 import PropTypes from 'prop-types'
-import { isToday, format } from 'date-fns'
+import { isToday, format, parseISO } from 'date-fns'
 
 import api from 'services/api'
 import { useAuth } from 'hooks'
@@ -28,6 +28,7 @@ const Dashboard = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [monthAvailability, setMonthAvailability] = useState([])
+  const [appointments, setAppointments] = useState([])
 
   const handleDayClick = useCallback((day, modifiers) => {
     modifiers.available && setSelectedDate(day)
@@ -49,6 +50,26 @@ const Dashboard = () => {
       .catch(error => console.log(error)) /* eslint-disable-line */
   }, [currentMonth, user.id])
 
+  useEffect(() => {
+    const params = {
+      year: selectedDate.getFullYear(),
+      month: selectedDate.getMonth() + 1,
+      day: selectedDate.getDate()
+    }
+
+    api
+      .get('/appointments/schedule', { params })
+      .then(response => {
+        const formattedAppointments = response.data.map(appointment => ({
+          ...appointment,
+          hour: format(parseISO(appointment.date), 'HH:mm')
+        }))
+
+        setAppointments(formattedAppointments)
+      })
+      .catch(error => console.log(error)) /* eslint-disable-line */
+  }, [selectedDate])
+
   const disabledDays = useMemo(() => {
     return monthAvailability
       .filter(day => !day.available)
@@ -66,6 +87,18 @@ const Dashboard = () => {
   const selectedWeekDay = useMemo(() => {
     return format(selectedDate, 'cccc')
   }, [selectedDate])
+
+  const morningAppointments = useMemo(() => {
+    return appointments.filter(
+      appointment => parseISO(appointment.date).getHours() < 12
+    )
+  }, [appointments])
+
+  const afternoonAppointments = useMemo(() => {
+    return appointments.filter(
+      appointment => parseISO(appointment.date).getHours() >= 12
+    )
+  }, [appointments])
 
   return (
     <Container>
@@ -115,70 +148,44 @@ const Dashboard = () => {
           <Section>
             <strong>Morning</strong>
 
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
+            {morningAppointments.map(appointment => (
+              <Appointment key={appointment.id}>
+                <span>
+                  <FiClock />
+                  {appointment.hour}
+                </span>
 
-              <div>
-                <img
-                  src="https://github.com/marina-ferreira.png"
-                  alt="Marina Ferreira"
-                />
+                <div>
+                  <img
+                    src={appointment.user.avatar_url}
+                    alt={appointment.user.name}
+                  />
 
-                <strong>Marina Ferreira</strong>
-              </div>
-            </Appointment>
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-
-              <div>
-                <img
-                  src="https://github.com/marina-ferreira.png"
-                  alt="Marina Ferreira"
-                />
-
-                <strong>Marina Ferreira</strong>
-              </div>
-            </Appointment>
+                  <strong>{appointment.user.name}</strong>
+                </div>
+              </Appointment>
+            ))}
           </Section>
           <Section>
             <strong>Afternoon</strong>
 
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
+            {afternoonAppointments.map(appointment => (
+              <Appointment key={appointment.id}>
+                <span>
+                  <FiClock />
+                  {appointment.hour}
+                </span>
 
-              <div>
-                <img
-                  src="https://github.com/marina-ferreira.png"
-                  alt="Marina Ferreira"
-                />
+                <div>
+                  <img
+                    src={appointment.user.avatar_url}
+                    alt={appointment.user.name}
+                  />
 
-                <strong>Marina Ferreira</strong>
-              </div>
-            </Appointment>
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-
-              <div>
-                <img
-                  src="https://github.com/marina-ferreira.png"
-                  alt="Marina Ferreira"
-                />
-
-                <strong>Marina Ferreira</strong>
-              </div>
-            </Appointment>
+                  <strong>{appointment.user.name}</strong>
+                </div>
+              </Appointment>
+            ))}
           </Section>
         </Schedule>
         <Calendar>

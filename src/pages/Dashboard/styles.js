@@ -127,6 +127,7 @@ export const NextAppointment = styled.div`
       width: 80px;
       height: 80px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     strong {
@@ -170,6 +171,7 @@ export const Appointment = styled.div`
   }
 
   span {
+    width: 65px;
     margin-left: auto;
     display: flex;
     align-items: center;
@@ -194,6 +196,7 @@ export const Appointment = styled.div`
       width: 56px;
       height: 56px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     strong {
