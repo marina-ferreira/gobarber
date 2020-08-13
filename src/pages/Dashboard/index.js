@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { FiPower, FiClock } from 'react-icons/fi'
 import DayPicker from 'react-day-picker'
 import PropTypes from 'prop-types'
+import { isToday, format } from 'date-fns'
 
 import api from 'services/api'
 import { useAuth } from 'hooks'
@@ -58,6 +59,14 @@ const Dashboard = () => {
       })
   }, [currentMonth, monthAvailability])
 
+  const selectedDateAsText = useMemo(() => {
+    return format(selectedDate, 'MMMM do')
+  }, [selectedDate])
+
+  const selectedWeekDay = useMemo(() => {
+    return format(selectedDate, 'cccc')
+  }, [selectedDate])
+
   return (
     <Container>
       <Header>
@@ -84,9 +93,9 @@ const Dashboard = () => {
           <h1>Scheduled Appointments</h1>
 
           <p>
-            <span>Today</span>
-            <span>Day 7</span>
-            <span>Monday</span>
+            {isToday(selectedDate) && <span>Today</span>}
+            <span>{selectedDateAsText}</span>
+            <span>{selectedWeekDay}</span>
           </p>
 
           <NextAppointment>
