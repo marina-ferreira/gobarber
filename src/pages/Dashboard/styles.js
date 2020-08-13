@@ -51,14 +51,20 @@ export const Profile = styled.div`
     flex-direction: column;
     margin-left: 16px;
     line-height: 24px;
-  }
 
-  span {
-    color: ${appColors.text.offWhite};
-  }
+    span {
+      color: ${appColors.text.offWhite};
+    }
 
-  strong {
-    color: ${appColors.bg.button};
+    a {
+      text-decoration: none;
+      color: ${appColors.bg.button};
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 `
 export const Content = styled.main`

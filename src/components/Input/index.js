@@ -8,7 +8,7 @@ import { Container, Error } from './styles'
 
 const { text } = appColors
 
-const Input = ({ name, icon: Icon, ...props }) => {
+const Input = ({ name, icon: Icon, containerStyle, ...props }) => {
   const inputRef = useRef(null)
   const [isFocused, setIsFocused] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
@@ -30,7 +30,12 @@ const Input = ({ name, icon: Icon, ...props }) => {
   }, [])
 
   return (
-    <Container isFilled={isFilled} isFocused={isFocused} isErrored={!!error}>
+    <Container
+      isFilled={isFilled}
+      isFocused={isFocused}
+      isErrored={!!error}
+      style={containerStyle}
+    >
       {Icon && <Icon size={20} />}
 
       <input
@@ -56,9 +61,13 @@ export default Input
 
 Input.propTypes = {
   name: PropTypes.string.isRequired,
-  icon: PropTypes.elementType
+  icon: PropTypes.elementType,
+  containerStyle: PropTypes.shape({
+    [PropTypes.string]: PropTypes.string || PropTypes.number
+  })
 }
 
 Input.defaultProps = {
-  icon: null
+  icon: null,
+  containerStyle: {}
 }

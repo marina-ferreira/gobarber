@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import { FiPower, FiClock } from 'react-icons/fi'
 import DayPicker from 'react-day-picker'
 import PropTypes from 'prop-types'
@@ -117,7 +118,10 @@ const Dashboard = () => {
 
             <div>
               <span>Welcome,</span>
-              <strong>{user.name}</strong>
+
+              <Link to="/profile">
+                <strong>{user.name}</strong>
+              </Link>
             </div>
           </Profile>
 
