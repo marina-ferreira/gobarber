@@ -24,7 +24,7 @@ const schema = Yup.object().shape({
 const Profile = () => {
   const formRef = useRef(null)
   const { showToast } = useToast()
-  const { user } = useAuth()
+  const { user, updateUser } = useAuth()
   const history = useHistory()
 
   const handleSubmit = useCallback(
@@ -59,6 +59,28 @@ const Profile = () => {
     [history, showToast]
   )
 
+  const handleAvatarChange = useCallback(
+    e => {
+      const data = new FormData()
+      const file = e.target.files[0]
+
+      if (!file) return
+
+      data.append('avatar', file)
+
+      api
+        .patch('/users/avatar', data)
+        .then(response => {
+          updateUser(response.data)
+          showToast({ type: 'success', title: 'Avatar updated!' })
+        })
+        .catch(() => {
+          showToast({ type: 'error', title: 'Avatar update error!' })
+        })
+    },
+    [showToast, updateUser]
+  )
+
   return (
     <Container>
       <header>
@@ -78,9 +100,10 @@ const Profile = () => {
           <AvatarInput>
             <img src={user.avatar_url} alt={user.name} />
 
-            <button type="button">
+            <label htmlFor="avatar">
               <FiCamera />
-            </button>
+              <input type="file" id="avatar" onChange={handleAvatarChange} />
+            </label>
           </AvatarInput>
 
           <h1>My profile</h1>
