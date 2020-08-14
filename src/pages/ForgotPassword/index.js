@@ -83,7 +83,7 @@ const ForgotPassword = () => {
             </Button>
           </Form>
 
-          <Link to="/sign-in">
+          <Link to="/">
             <FiLogIn />
             Back to sign in
           </Link>
