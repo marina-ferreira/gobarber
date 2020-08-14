@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+    <img alt="GoBarber" src="src/assets/logo.svg" height="100px" />
+    <br><br>GoStack Bootcamp<br/>
+    ReactJS
+</h1>
+<p align="center">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/marina-ferreira/gobarber?style=for-the-badge&color=yellow&logo=javascript">
 
-## Available Scripts
+  <img alt="Node Version" src="https://img.shields.io/badge/node-~12.17.0-87c001?style=for-the-badge&logo=node.js">
 
-In the project directory, you can run:
+  <img alt="React Version" src="https://img.shields.io/badge/dynamic/json?color=01daff&url=https://raw.githubusercontent.com/marina-ferreira/gobarber/master/package.json&query=$.dependencies.react&label=react&logo=react&style=for-the-badge">
 
-### `yarn start`
+  <br />
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <img alt="React Router Version" src="https://img.shields.io/badge/dynamic/json?color=ca4245&url=https://raw.githubusercontent.com/marina-ferreira/gobarber/master/package.json&query=$.dependencies['react-router-dom']&label=react-router&logo=react-router&style=for-the-badge">
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  <img alt="Styled Components Version" src="https://img.shields.io/badge/dynamic/json?color=de7aca&url=https://raw.githubusercontent.com/marina-ferreira/gobarber/master/package.json&query=$.dependencies['styled-components']&label=styled-components&logo=styled-components&style=for-the-badge">
 
-### `yarn test`
+  <img alt="Axios Version" src="https://img.shields.io/badge/dynamic/json?color=blueviolet&url=https://raw.githubusercontent.com/marina-ferreira/gobarber/master/package.json&query=$.dependencies.axios&label=axios&logo=axios&style=for-the-badge">
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+</p>
 
-### `yarn build`
+<p align="center">
+  <a href="#bookmark-about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-dependencies">Dependencies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#link-links">Links</a>
+</p>
+<br />
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p align="center">
+  <img alt="GoBaber Sign In" width="48%" src="./.github/sign-in.jpg" />
+  <img alt="GoBaber Profile" width="48%" src="./.github/profile.jpg" />
+  <img alt="GoBaber Dashboard" width="48%" src="./.github/dashboard.jpg" />
+  <img alt="GoBaber Sign Up" width="48%" src="./.github/sign-up.jpg" />
+</p>
+<br />
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## :bookmark: About
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ReactJS web application developed during the GobStack Bootcamp. It allows providers and clients to register an account and manage/schedule appointments.
 
-### `yarn eject`
+## :floppy_disk: Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-  [NodeJS](https://nodejs.org/en/) - v12.17.0
+-  [ReactJS](https://reactjs.org/) - v16.13.1
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## :link: Links
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [GoBarber - React Native](https://github.com/marina-ferreira/gobarber-mobile)
+- [GoBarber - Express API](https://github.com/marina-ferreira/gobarber-api)
