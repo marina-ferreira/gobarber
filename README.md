@@ -1,7 +1,7 @@
 <h1 align="center">
     <img alt="GoBarber" src="src/assets/logo.svg" height="100px" />
     <br><br>GoStack Bootcamp<br/>
-    ReactJS
+    ReactJS | React Native | NodeJS
 </h1>
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/marina-ferreira/gobarber?style=for-the-badge&color=yellow&logo=javascript">
