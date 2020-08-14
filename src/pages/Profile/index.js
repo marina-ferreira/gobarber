@@ -18,7 +18,19 @@ import { Container, Content, AvatarInput } from './styles'
 const schema = Yup.object().shape({
   name: Yup.string().required(),
   email: Yup.string().required().email(),
-  password: Yup.string().min(6)
+  old_password: Yup.string(),
+  password: Yup.string().when('old_password', {
+    is: val => !!val.length,
+    then: Yup.string().required(),
+    otherwise: Yup.string()
+  }),
+  password_confirmation: Yup.string()
+    .when('old_password', {
+      is: val => !!val.length,
+      then: Yup.string().required(),
+      otherwise: Yup.string()
+    })
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
 })
 
 const Profile = () => {
@@ -33,14 +45,31 @@ const Profile = () => {
 
       try {
         await schema.validate(data, { abortEarly: false })
-        await api.post('/users', data)
+        const {
+          name,
+          email,
+          old_password,
+          password,
+          password_confirmation
+        } = data
+
+        const formData = {
+          name,
+          email,
+          ...(old_password
+            ? { old_password, password, password_confirmation }
+            : {})
+        }
+
+        const response = await api.put('/profiles', formData)
+
+        updateUser(response.data)
 
         history.push('/')
-
         showToast({
           type: 'success',
-          title: 'Sign up successful',
-          description: 'You can sign in now'
+          title: 'Profile update successful',
+          description: 'Your information was successfuly updated!'
         })
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
@@ -51,12 +80,12 @@ const Profile = () => {
 
         showToast({
           type: 'error',
-          title: 'Authentication Error',
-          description: 'Sign in failed. Invalid credentials.'
+          title: 'Profile update error',
+          description: 'Profile could not be updated. Try again.'
         })
       }
     },
-    [history, showToast]
+    [history, showToast, updateUser]
   )
 
   const handleAvatarChange = useCallback(

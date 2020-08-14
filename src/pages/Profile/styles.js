@@ -36,7 +36,7 @@ export const Content = styled.div`
 
   form {
     width: 340px;
-    margin: 80px 0;
+    margin: 80px 0 auto;
     text-align: center;
     display: flex;
     flex-direction: column;
