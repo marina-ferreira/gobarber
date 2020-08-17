@@ -29,10 +29,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/pages/**/*.js",
+      "src/components/**/*.js",
+      "src/hooks/*.js",
+      "!src/hooks/index.js",
+      "!src/**/**/styles.js"
+    ]
   },
   "browserslist": {
     "production": [
