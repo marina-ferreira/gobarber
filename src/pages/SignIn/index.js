@@ -72,7 +72,7 @@ const SignIn = () => {
               name="password"
               type="password"
               icon={FiLock}
-              placeholder="Senha"
+              placeholder="Password"
             />
 
             <Button type="submit">Sign In</Button>
