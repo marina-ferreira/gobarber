@@ -3,10 +3,6 @@ import { render, fireEvent, wait } from '@testing-library/react'
 
 import Input from 'components/Input'
 
-// const mockedHistoryPush = jest.fn()
-// const mockedShowToast = jest.fn()
-// const mockedSignIn = jest.fn()
-
 jest.mock('@unform/core', () => {
   return {
     useField() {
@@ -19,17 +15,6 @@ jest.mock('@unform/core', () => {
     }
   }
 })
-
-// jest.mock('hooks', () => {
-//   return {
-//     useAuth: () => ({
-//       signIn: mockedSignIn
-//     }),
-//     useToast: () => ({
-//       showToast: mockedShowToast
-//     })
-//   }
-// })
 
 describe('Input Component', () => {
   it('should be able to render an input', async () => {
