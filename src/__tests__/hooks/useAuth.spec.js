@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react-hooks'
 import MockAdapter from 'axios-mock-adapter'
 
 import { useAuth } from 'hooks'
@@ -60,5 +60,34 @@ describe('useAuth Hook', () => {
       JSON.stringify(apiResponse.user)
     )
     expect(result.current.user.email).toEqual(email)
+  })
+
+  it('should restore local storage data', async () => {
+    const user = {
+      id: 'user123',
+      name: 'John Doe',
+      email: 'johndoe@email.com'
+    }
+
+    jest.spyOn(Storage.prototype, 'setItem').mockImplementation(key => {
+      switch (key) {
+        case '@GoBarber:token':
+          return 'token-123'
+        case '@GoBarber:user':
+          return JSON.stringify(user)
+        default:
+          return null
+      }
+    })
+
+    const { result } = renderHook(() => useAuth(), {
+      wrapper: AuthProvider
+    })
+
+    await act(async () => {
+      result.current.signIn({ email: user.email, password: '123456' })
+    })
+
+    expect(result.current.user.email).toEqual(user.email)
   })
 })
