@@ -35,6 +35,7 @@ const Input = ({ name, icon: Icon, containerStyle, ...props }) => {
       isFocused={isFocused}
       isErrored={!!error}
       style={containerStyle}
+      data-testid="input-container"
     >
       {Icon && <Icon size={20} />}
 
